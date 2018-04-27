@@ -416,15 +416,26 @@ void MP1Node::increaseSelfHeartbeat()
 void MP1Node::deleteFailedNodes()
 {
 	long currentTime = par->getcurrtime();
-	for (vector<MemberListEntry>::iterator iter = memberNode->memberList.begin();
+	/*for (vector<MemberListEntry>::iterator iter = memberNode->memberList.begin();
 		iter != memberNode->memberList.end(); ++iter)
 	{
 		if (currentTime - iter->timestamp >= TREMOVE)
 		{
 			Address addr = getAddressFromIPAndPort(iter->id, iter->port);
 			log->logNodeRemove(&memberNode->addr, &addr);
-			memberNode->memberList.erase(iter);
+			memberNode->memberList.erase(iter); // erase invalidates the iterator, cannot be used anymore
 		}
+	}*/
+	vector<MemberListEntry>::iterator iter = memberNode->memberList.begin();
+	while (iter != memberNode->memberList.end())
+	{
+		if (currentTime - iter->timestamp >= TREMOVE)
+		{
+			Address addr = getAddressFromIPAndPort(iter->id, iter->port);
+			log->logNodeRemove(&memberNode->addr, &addr);
+			iter = memberNode->memberList.erase(iter);
+		}
+		++iter;
 	}
 }
 

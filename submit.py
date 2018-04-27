@@ -35,7 +35,7 @@ def submit():
     return
 
   
-  output = subprocess.Popen(['sh', 'run.sh', str(0)]).communicate()[0]
+  #output = subprocess.Popen(['sh', 'run.sh', str(0)]).communicate()[0]
   submissions = [source(i) for i in range(3)]
   submitSolution(login, password, submissions)
   

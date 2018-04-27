@@ -24,7 +24,7 @@ void handler(int sig) {
  *
  * DESCRIPTION: main function. Start from here
  **********************************/
-int main2(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 	//signal(SIGSEGV, handler);
 	if ( argc != ARGS_COUNT ) {
 		cout<<"Configuration (i.e., *.conf) file File Required"<<endl;
@@ -41,9 +41,9 @@ int main2(int argc, char *argv[]) {
 	return SUCCESS;
 }
 
-int main()
+int main2()
 {
-	auto myfile = "D:\\Distributed Systems\\mp1\\testcases\\singlefailure.conf";
+	auto myfile = "D:\\Distributed Systems\\mp1\\testcases\\msgdropsinglefailure.conf";
 	Application *app = new Application(myfile);
 	// Call the run function
 	app->run();
